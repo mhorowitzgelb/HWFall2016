@@ -1,0 +1,90 @@
+60
+Will use: degrees for testing rotation matrices.
+
+Rotation axis (unnormalized): [2.0, 2.0, 2.0] Angle of rotation: 60.0
+[[ 0.66666667 -0.33333333  0.66666667]
+ [ 0.66666667  0.66666667 -0.33333333]
+ [-0.33333333  0.66666667  0.66666667]]
+Rotation matrix determinant: 1.0
+... checking the rotation angle of matrix using Eq (2.27): 60.0
+... eigenvalues and eigenvectors of the matrix (look for all real case):
+   (0.5+0.866025403784j) [-0.28867513-0.5j -0.28867513+0.5j  0.57735027+0.j ]
+   (0.5-0.866025403784j) [-0.28867513+0.5j -0.28867513-0.5j  0.57735027-0.j ]
+   (1+0j) [ 0.57735027+0.j  0.57735027+0.j  0.57735027+0.j]
+
+Rotation axis (unnormalized): [3.0, 4.0, 5.0] Angle of rotation: 60.0
+[[ 0.59       -0.49237244  0.63989795]
+ [ 0.73237244  0.66       -0.16742346]
+ [-0.33989795  0.56742346  0.75      ]]
+Rotation matrix determinant: 1.0
+... checking the rotation angle of matrix using Eq (2.27): 60.0
+... eigenvalues and eigenvectors of the matrix (look for all real case):
+   (0.5+0.866025403784j) [ 0.64031242+0.j         -0.18740851-0.55215763j -0.23426064+0.4417261j ]
+   (0.5-0.866025403784j) [ 0.64031242-0.j         -0.18740851+0.55215763j -0.23426064-0.4417261j ]
+   (1+0j) [ 0.42426407+0.j  0.56568542+0.j  0.70710678+0.j]
+
+Rotation axis (unnormalized): [1.0, 0.0, 0.0] Angle of rotation: 60.0
+[[ 1.         0.         0.       ]
+ [ 0.         0.5       -0.8660254]
+ [ 0.         0.8660254  0.5      ]]
+Rotation matrix determinant: 1.0
+... checking the rotation angle of matrix using Eq (2.27): 60.0
+... eigenvalues and eigenvectors of the matrix (look for all real case):
+   (0.5+0.866025403784j) [ 0.00000000+0.j          0.70710678+0.j          0.00000000-0.70710678j]
+   (0.5-0.866025403784j) [ 0.00000000-0.j          0.70710678-0.j          0.00000000+0.70710678j]
+   (1+0j) [ 1.+0.j  0.+0.j  0.+0.j]
+
+Rotation axis (unnormalized): [-1.0, 0.0, 0.0] Angle of rotation: 60.0
+[[ 1.        -0.         0.       ]
+ [ 0.         0.5        0.8660254]
+ [-0.        -0.8660254  0.5      ]]
+Rotation matrix determinant: 1.0
+... checking the rotation angle of matrix using Eq (2.27): 60.0
+... eigenvalues and eigenvectors of the matrix (look for all real case):
+   (0.5+0.866025403784j) [ 0.00000000-0.j         -0.70710678+0.j          0.00000000-0.70710678j]
+   (0.5-0.866025403784j) [ 0.00000000+0.j         -0.70710678-0.j          0.00000000+0.70710678j]
+   (1+0j) [ 1.+0.j  0.+0.j  0.+0.j]
+
+Rotation axis (unnormalized): [0.0, 0.0, 1.0] Angle of rotation: 60.0
+[[ 0.5       -0.8660254  0.       ]
+ [ 0.8660254  0.5        0.       ]
+ [ 0.         0.         1.       ]]
+Rotation matrix determinant: 1.0
+... checking the rotation angle of matrix using Eq (2.27): 60.0
+... eigenvalues and eigenvectors of the matrix (look for all real case):
+   (0.5+0.866025403784j) [ 0.70710678+0.j          0.00000000-0.70710678j  0.00000000-0.j        ]
+   (0.5-0.866025403784j) [ 0.70710678-0.j          0.00000000+0.70710678j  0.00000000+0.j        ]
+   (1+0j) [ 0.+0.j  0.+0.j  1.+0.j]
+
+Rotation axis (unnormalized): [1.0, 0.0, 1.0] Angle of rotation: 60.0
+[[ 0.75       -0.61237244  0.25      ]
+ [ 0.61237244  0.5        -0.61237244]
+ [ 0.25        0.61237244  0.75      ]]
+Rotation matrix determinant: 1.0
+... checking the rotation angle of matrix using Eq (2.27): 60.0
+... eigenvalues and eigenvectors of the matrix (look for all real case):
+   (1+0j) [  7.07106781e-01+0.j  -2.29286335e-16+0.j   7.07106781e-01+0.j]
+   (0.5+0.866025403784j) [  1.52655666e-16+0.5j   7.07106781e-01+0.j   -4.16333634e-17-0.5j]
+   (0.5-0.866025403784j) [  1.52655666e-16-0.5j   7.07106781e-01-0.j   -4.16333634e-17+0.5j]
+
+Rotation axis (unnormalized): [1.0, 1.0, 1.0] Angle of rotation: 60.0
+[[ 0.66666667 -0.33333333  0.66666667]
+ [ 0.66666667  0.66666667 -0.33333333]
+ [-0.33333333  0.66666667  0.66666667]]
+Rotation matrix determinant: 1.0
+... checking the rotation angle of matrix using Eq (2.27): 60.0
+... eigenvalues and eigenvectors of the matrix (look for all real case):
+   (0.5+0.866025403784j) [-0.28867513-0.5j -0.28867513+0.5j  0.57735027+0.j ]
+   (0.5-0.866025403784j) [-0.28867513+0.5j -0.28867513-0.5j  0.57735027-0.j ]
+   (1+0j) [ 0.57735027+0.j  0.57735027+0.j  0.57735027+0.j]
+
+Rotation axis (unnormalized): [1.0, 2.0, 3.0] Angle of rotation: 60.0
+[[ 0.53571429 -0.6229365   0.57005291]
+ [ 0.76579365  0.64285714 -0.01716931]
+ [-0.35576719  0.44574074  0.82142857]]
+Rotation matrix determinant: 1.0
+... checking the rotation angle of matrix using Eq (2.27): 60.0
+... eigenvalues and eigenvectors of the matrix (look for all real case):
+   (0.5+0.866025403784j) [ 0.68138514+0.j         -0.10482848-0.58834841j -0.15724273+0.39223227j]
+   (0.5-0.866025403784j) [ 0.68138514-0.j         -0.10482848+0.58834841j -0.15724273-0.39223227j]
+   (1+0j) [ 0.26726124+0.j  0.53452248+0.j  0.80178373+0.j]

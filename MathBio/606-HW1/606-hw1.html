@@ -1,0 +1,345 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html>
+<head>
+<title>Math/Biochem 606: Homework I</title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+</head>
+
+<body>
+<a name='top'></a>
+<h1>Math/Biochem 606: Homework I</h1>
+
+<p>  </p>
+<ol>
+<li><a href='#1'>General information</a></li>
+<li><a href='#2'>Setting up your computer</a></li>
+<li><a href='#3'>Homework and demos</a></li>
+<li><a href='#5'>Links</a></li>
+</ol>
+
+<a name='1'></a><a href='#top'>Top</a>
+<h2>1. General information</h2>
+
+<p>
+<strong> Do not panic!</strong> This file seems long, but this homework assignment is not difficult! Most of the text here is either background information or instructions to help you complete this homework set. Read the instructions carefully. 
+Our goal in presenting the workshops is twofold.  First, we believe the best way to
+learn and appreciate the lecture material is it apply it to problems yourself through
+computational projects.
+Second, we believe that the programming tools you use in the exercises will provide
+you with enough knowledge to continue using these tools in your future work.  While we do
+not expect everyone to become a fluent Python programmer, our hope is that
+you will gain a solid background in how to use Python in a variety of applications,
+and with this basis, you will be set to build upon your skills and continue using
+Python and the various tools.
+</p>
+<p>Initially, the basic approach for the homework in this course will be to give you
+a Python program with something missing.  You will be expected to write the
+missing piece of Python code in order to get the program running. While this
+is certainly a "dive-in" approach, we believe that the context of building
+something within a surrounding structure has its merits.
+Note that you need
+not totally understand how all the surrounding structure works in order to use it.
+So, please don't be intimidated by the possible complex appearance of the sea
+of code you've been thrown into.  Usually the programs you are given will have
+sections that are specifically set-up to demonstrate and introduce some new programming 
+technique.
+Your initial focus should be given to completing
+the piece of code which you are required to write, which will be clearly marked.  
+</p><p>
+ The exercises are hopefully well defined
+enough to make this possible.  After you fill-in the missing piece and run the program,
+you should go back and try to figure out some of the surrounding code.  Look for Python features
+and idioms which are new to you.  Try to figure out how they work.  Ask about the parts
+you don't understand.  Using this immersive, application-driven approach,
+we hope these exercises will be informative, useful, and fun.
+</p><p>
+If you need additional help at anytime please come by during office hours.  Our offices are on the second
+floor of the Biochemistry Building on Henry Mall, Room 2104 Biochemistry.
+
+
+<a name='2'></a><a href='#top'>Top</a>
+<h2>2. Setting up your computer</h2>
+Please let us know if you do not have access to a computer to use for this course, and we
+can arrange a time for you to use one of the computers in Professor Mitchell's Lab in Room 2104, Biochemistry Building.
+
+In order to use your own computer for the workshop material you will 
+need to install several packages:
+
+<ul>
+<li>python
+<li>numpy
+<li>scipy
+<li>matplotlib
+<li>pymol
+</ul>
+<h3>For Windows and MACs:</h3>
+<p>
+Use the education version of the Enthought Python Distribution(Installation link provided on Course syllabus). Note that you may wish to keep the installer in case you want to uninstall it later, as it overrides the 
+default Python installation on the Mac (but adds lots of good things you might like having, so you may want to keep it after all.):
+
+
+
+<a name='3'></a><a href='#top'>Top</a>
+<h2>3. Homework and Demos</h2>
+<p> There are three homework problems in this homework set. The first and the third require you to fill in missing code from the python files. The second problem is a demo to help you understand python and the concept of rotations.
+</p>
+<ul>
+<li><h3>Problem 1:  show_peptide_planes</h3>
+<p>
+In this exercise you will use vectors and vector products to draw a normal
+vector to the peptide bond plane. <i>Your assignment is to finish the function which
+calculates the normalized cross-product of two vectors.</i>  The location in the code
+where you must finish the function should be clearly indicated. When the program runs, it will
+read in a small PDB file containing the atomic coordinates for a tetra-peptide.  This file name
+is hardwired into the program, so no command line arguments are necessary to run it.  From a command line
+you can run the program by simply typing: <br>
+<pre>
+python show_peptide_planes.py
+</pre>
+<br>
+<p>
+For those of you that are using Windows, we recommend using the console of the Canopy program. Navigate to the folder you are working in and set it as your current working directory. The command you will then use is:
+<pre>
+%run show_peptide_planes.py
+</pre>
+Alternatively, you can use the green arrow located on the toolbar to run the file.
+</p>
+
+When the program successfully finishes, a new PDB file will be written out containing some
+dummy atoms marking for viewing the normal vector directions.  You will then use PyMol
+to display the results.  There are two versions of <code>.pml</code> files.  One version simply uses
+the PyMol distance command to draw a line segment between the two dummy atoms along the normal.
+The second uses a fancier method to render cylinder objects.  For the later case, a python
+program is written out which the <code>.pml</code> file runs while it is running within PyMol.
+</p>
+<p>
+<h4>Files used:</h4>
+<ol>
+<li> <pre>show_peptide_planes.py</pre> program source code (PROGRAM,  given)
+<li> <pre>tetrapeptide.pdb</pre> PDB input file (INPUT, given)
+<li> <pre>tetra.pml</pre>  PyMol script for simple display (used by PyMol, given)
+<li> <pre>tetra_cyls.pml</pre> PyMol script for fancy display (used by PyMol, given)
+</ol>
+</p>
+
+<h4> Output files created:</h4>
+<ul>
+<li> <pre>tetrapepnew.pdb</pre>  PDB output file (OUTPUT)
+<li> <pre>pymol_cylinders.py</pre>  a short python program (OUTPUT, used by <code>tetra_cyls.pml</code>)
+</ul>
+<p>
+<h4>Viewing results in PyMol:</h4>
+Startup PyMol, navigate to the correct folder using the <code> cd </code> command and at the command line prompt enter:
+<pre>
+@tetra.pml
+</pre>
+Note the first character is the uppercase character on the 2-key.
+</p>
+
+<p>
+Hint for MAC users: you can train your MAC to automatically open files
+based on the extension name through "Finder."  Locate a file with the given
+filename extension, say <code>.pml</code> or <code>.pdb</code>, in Finder.
+Right mouse click on the file (control-click on one button mouse) and then click
+"Info."  Next find the "Open with" section of the panel, select the application,
+then click the "Change All.." button.  Now all files with that extension will
+automatically use that application if you double click on the filename in finder.
+Also, you use these associations from the command line using the <code>open</code> commnad.
+Say, for example, if you've set <code>.pml</code> files to open with PyMol you can simply type
+<pre>
+open tetra.pml
+</pre>
+to run Pymol using the specified script.
+</p>
+<h4> Deliverables:</h4>
+Along with the original files, Please create a folder titled <b>P1</b>, with the following files
+<ul>
+<li> A copy of the <i>completed</i> show_peptide_planes.py file
+<li> Output tetrapepnew.pdb
+<li> Picture from pymol of the tetrapeptide showing the normal vectors named p1_planes.(Hint: use the png command) 
+</ul>
+<li><h3>Problem 2: rotation_test</h3>
+<p>
+In this exercise you specify an angle on the command line when you run the program
+<pre>
+python rotation_test.py 45.0
+</pre>
+For those of you using Canopy on Windows, please use the following command on the console:
+<pre>
+%run rotation_test.py 45.0
+</pre>
+
+and observe the different rotation matrices defined using the specified angle.
+A set of vectors are defined inside the program which are each used as an axis to calculate
+the rotation matrices.  The program should run as given.  After testing a few different angles and
+studying the output, try to see what patterns emerge, say, for angles at certain values like
+0, 30, 90, -90, 45., 78.3123, so forth.  When your bored with this, go into the code and add
+some different vectors to the list.
+</p>
+<p>
+Note that this program introduces the use of the <code>Numpy</code>
+module, so look closely on how it has been used.  Look up how to evaluate the determinant using
+<code>Numpy</code> and add this value for each matrix to the output.  Note also that this program
+makes use of "Axis-Angle Representation" from Section 2.3.2 of the text, and also uses Equation 2.30.
+</p>
+<p>
+If you'd like to see a derivation of the axis-angle rotation matrix see the free
+online book "Vector Analysis" by J. Willard Gibbs and E. B. Wilson:
+ <a href="http://www.archive.org/stream/117714283#page/338/mode/2up/search/versor" target="vers"> (Read)</a></p>
+</p>
+
+<h4>Only File used:</h4>
+<ol>
+<li> <pre>rotation_test.py</pre> program source code (PROGRAM,  given)
+</ol>
+</p>
+
+<h4> Deliverable:</h4>
+Please create a folder titled <b>P2</b>, with the following file
+<ul>
+<li> A copy of the console output for this program, using 60 degrees as the input angle in a file titled p2_rotation.txt
+</ul>
+
+
+<li><h3>Problem 3: Ramachandran</h3>
+<p>
+In this exercise you must first complete some code for calculating the <strong>psi</strong> angle.
+This location in the code is marked to be obvious.
+The program has ample comments and this shouldn't be too hard to do, especially since the
+code for calculating <strong>phi</strong> is nearby.
+</p>
+<p>
+<b>Hint:</b> Please use the diagram at the bottom of the file as a reference to understand the atoms, bonds and angles you are working with. Once you are clear with that, this assignment becomes trivial! Follow the diagram, and use the given code for <strong>phi</strong> to guide your work to calculate <strong>psi</strong> 
+
+This program also contains some extra demos in order to
+introduce you to the usage of the <code>PDButils</code> module.  This module will be used
+in many of your future projects. It is worth mapping the output on the screen back to the
+various blocks of code from the program to see how things work.
+The <code>Matplotlib</code> package is also
+used in this program to generate a Ramachandran plot. This will also be useful for future assignments as well as to understand how to set up plots using python.
+</p>
+<p>
+To run the program you must specify the name of a PDB file on the command line, for example:
+<pre>
+python ramachandran.py 1fat.pdb
+</pre>
+With Canopy on Windows, you can use this command on the console
+<pre>
+%run ramachandran.py 1fat.pdb
+</pre>
+
+You should use <code>1fat.pdb</code> to test code since the output is provided
+below for you to check your <strong>psi</strong> angles.
+</p>
+
+<h4>Files used:</h4>
+<ol>
+<li> <pre>ramachandran.py</pre>
+program source code (PROGRAM,  given)
+<li> <pre>PDButils.py</pre>
+python source code for PDButils module (given)
+<li> <pre>several PDB files are provided</pre>
+</ol>
+</p>
+
+<h4>Sample output:</h4>
+<p>
+In order to check your code, here is a section of the output for PDB file
+<code>1fat.pdb</code>.  Note two things about this sample.  First, there is
+a chain gap.  This is not unusual for PDB structures to have gaps, but you
+must take special care in handling them in you programs or bad things can happen.
+Second, this chain has a cis-peptide bond.  This is unusual for PDB structures,
+but it can happen.
+<br>
+
+<pre>
+================ begin sample output ================ 
+...
+
+Opened and read file: 1fat.pdb
+
+( *** below output is from Demo Part II. *** )
+
+...
+
+Sequence gap in model between residues ASN 36 and ASN 38
+
+( *** below output is from Demo Part V. *** )
+
+Chain/Res/Phi/Psi/Omega: A SER   1  -999.0   135.6    177.60
+Chain/Res/Phi/Psi/Omega: A ASN   2  -152.1    70.1   -175.25
+Chain/Res/Phi/Psi/Omega: A ASP   3   -79.6   160.0    177.92
+Chain/Res/Phi/Psi/Omega: A ILE   4  -153.5   149.0    179.65
+Chain/Res/Phi/Psi/Omega: A TYR   5  -165.1   139.4    177.32
+Chain/Res/Phi/Psi/Omega: A PHE   6  -155.4   163.3   -177.07
+Chain/Res/Phi/Psi/Omega: A ASN   7  -158.9   113.7    179.97
+Chain/Res/Phi/Psi/Omega: A PHE   8  -107.5   118.0    175.69
+Chain/Res/Phi/Psi/Omega: A GLN   9   -94.8     0.9    177.57
+Chain/Res/Phi/Psi/Omega: A ARG  10  -165.2   131.2   -175.53
+Chain/Res/Phi/Psi/Omega: A PHE  11   -86.6   150.1    178.34
+Chain/Res/Phi/Psi/Omega: A ASN  12  -146.1   138.0   -178.40
+Chain/Res/Phi/Psi/Omega: A GLU  13   -70.6    -0.3   -175.49
+Chain/Res/Phi/Psi/Omega: A THR  14   -79.4   -21.6    176.81
+Chain/Res/Phi/Psi/Omega: A ASN  15  -114.9    29.7   -177.57
+Chain/Res/Phi/Psi/Omega: A LEU  16  -128.7   147.8    174.66
+Chain/Res/Phi/Psi/Omega: A ILE  17  -107.5   115.3   -178.04
+Chain/Res/Phi/Psi/Omega: A LEU  18  -107.6   136.2   -179.88
+Chain/Res/Phi/Psi/Omega: A GLN  19  -124.8   136.1   -179.85
+Chain/Res/Phi/Psi/Omega: A ARG  20    60.1  -126.3   -175.63
+Chain/Res/Phi/Psi/Omega: A ASP  21   -78.6     1.2   -179.41
+Chain/Res/Phi/Psi/Omega: A ALA  22   -64.3   144.9   -179.81
+Chain/Res/Phi/Psi/Omega: A SER  23  -164.2   156.7    178.77
+Chain/Res/Phi/Psi/Omega: A VAL  24  -106.8   125.0   -178.01
+Chain/Res/Phi/Psi/Omega: A SER  25   -74.5   165.7    178.83
+Chain/Res/Phi/Psi/Omega: A SER  26   -58.4   -21.1    179.70
+Chain/Res/Phi/Psi/Omega: A SER  27   -95.2     8.3    178.86
+Chain/Res/Phi/Psi/Omega: A GLY  28    71.2    39.4    178.16
+Chain/Res/Phi/Psi/Omega: A GLN  29  -110.7   137.8    178.18
+Chain/Res/Phi/Psi/Omega: A LEU  30   -82.0   112.8    179.16
+Chain/Res/Phi/Psi/Omega: A ARG  31  -105.1   103.5   -177.44
+Chain/Res/Phi/Psi/Omega: A LEU  32   -67.4   -24.8   -179.93
+Chain/Res/Phi/Psi/Omega: A THR  33  -131.5   152.4    178.72
+Chain/Res/Phi/Psi/Omega: A ASN  34   -60.0   176.6    177.92
+Chain/Res/Phi/Psi/Omega: A LEU  35  -140.3  -167.9   -179.08
+Chain/Res/Phi/Psi/Omega: A ASN  36  -153.5  -999.0   -999.00
+Chain/Res/Phi/Psi/Omega: A ASN  38  -999.0   -51.5   -179.75
+Chain/Res/Phi/Psi/Omega: A GLY  39   100.7    35.8   -179.88
+Chain/Res/Phi/Psi/Omega: A GLU  40  -112.7   142.4    179.93
+Chain/Res/Phi/Psi/Omega: A PRO  41   -55.1   124.7    179.90
+
+...
+
+Chain/Res/Phi/Psi/Omega: A ALA  82  -168.0   166.3    179.91
+Chain/Res/Phi/Psi/Omega: A GLY  83  -128.1   151.7   -179.80
+Chain/Res/Phi/Psi/Omega: A PRO  84   -59.5   141.3    176.33
+Cis-peptide between: ALA 85 and ASP 86
+Chain/Res/Phi/Psi/Omega: A ALA  85  -179.2   141.9     -0.04
+Chain/Res/Phi/Psi/Omega: A ASP  86  -109.6   -27.9    178.54
+Chain/Res/Phi/Psi/Omega: A GLY  87   154.3  -175.4   -179.50
+Chain/Res/Phi/Psi/Omega: A LEU  88  -143.3   149.0    179.65
+
+...
+
+================ end sample output ================ 
+</pre>
+
+<h4> Deliverables:</h4>
+Please create a folder titled <b>P3</b>, with the following files
+<ul>
+<li> A copy of the <i>completed</i> ramachandran.py file
+<li> The Ramachandran plot for 1fat.pdb from matplotlib saved as 'ramachandran_1fat.png' 
+<li> The Ramachandran plot for 4cln.pdb saved as 'ramachandran_4cln.png'
+</ul>
+
+
+</ul>
+<a name='5'></a><a href='#top'>Top</a>
+<h2>4. Links</h2>
+
+<p>PDB file description: <a href="http://www.wwpdb.org/documentation/format32/v3.2.html" target="pdbdoc"> (Visit)</a></p>
+<p>Numpy and scipy documentation: <a href="http://docs.scipy.org/doc/" target="nsdoc"> (Visit)</a></p>
+<p>Matplotlib home page: <a href="http://matplotlib.sourceforge.net/" target="mplt"> (Visit)</a></p>
+<p>Dive Into Python Book<a href="http://www.diveintopython.net/toc/index.html" target="Dive"> (Read)</a></p>
+<p>Byte of Python Book<a href="http://www.ibiblio.org/swaroopch/byteofpython/read/" target="Dive"> (Read)</a></p>
+<p>Python documentation: <a href="http://docs.python.org/reference/" target="pdoc"> (Visit)</a></p>
+</body></html>
