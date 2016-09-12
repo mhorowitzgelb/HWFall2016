@@ -1,4 +1,4 @@
-GAMS 24.7.3  r58181 Released Jul 11, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      09/10/16 14:33:47 Page 1
+GAMS 24.7.3  r58181 Released Jul 11, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      09/12/16 16:05:56 Page 1
 HW1-1
 C o m p i l a t i o n
 
@@ -30,9 +30,9 @@ C o m p i l a t i o n
   27  eq3..
   28  -5 * x1 + 9 * x2 =g= 3;
   29   
-  30  model topbrass /all/;
+  30  model prob1 /all/;
   31   
-  32  solve topbrass using lp minimize obj;
+  32  solve prob1 using lp minimize obj;
   33   
   34  parameter x1val, x2val, x3val, objval;
   35   
@@ -48,9 +48,9 @@ C o m p i l a t i o n
 
 
 COMPILATION TIME     =        0.001 SECONDS      2 MB  24.7.3 r58181 LEX-LEG
-GAMS 24.7.3  r58181 Released Jul 11, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      09/10/16 14:33:47 Page 2
+GAMS 24.7.3  r58181 Released Jul 11, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      09/12/16 16:05:56 Page 2
 HW1-1
-Model Statistics    SOLVE topbrass Using LP From line 32
+Model Statistics    SOLVE prob1 Using LP From line 32
 
 
 MODEL STATISTICS
@@ -60,18 +60,18 @@ BLOCKS OF VARIABLES           4     SINGLE VARIABLES            4
 NON ZERO ELEMENTS            11
 
 
-GENERATION TIME      =        0.001 SECONDS      3 MB  24.7.3 r58181 LEX-LEG
+GENERATION TIME      =        0.247 SECONDS      3 MB  24.7.3 r58181 LEX-LEG
 
 
-EXECUTION TIME       =        0.001 SECONDS      3 MB  24.7.3 r58181 LEX-LEG
-GAMS 24.7.3  r58181 Released Jul 11, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      09/10/16 14:33:47 Page 3
+EXECUTION TIME       =        0.247 SECONDS      3 MB  24.7.3 r58181 LEX-LEG
+GAMS 24.7.3  r58181 Released Jul 11, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      09/12/16 16:05:56 Page 3
 HW1-1
-Solution Report     SOLVE topbrass Using LP From line 32
+Solution Report     SOLVE prob1 Using LP From line 32
 
 
                S O L V E      S U M M A R Y
 
-     MODEL   topbrass            OBJECTIVE  obj
+     MODEL   prob1               OBJECTIVE  obj
      TYPE    LP                  DIRECTION  MINIMIZE
      SOLVER  CPLEX               FROM LINE  32
 
@@ -79,7 +79,7 @@ Solution Report     SOLVE topbrass Using LP From line 32
 **** MODEL STATUS      1 Optimal                   
 **** OBJECTIVE VALUE              -65.3333
 
- RESOURCE USAGE, LIMIT          0.003      1000.000
+ RESOURCE USAGE, LIMIT          0.008      1000.000
  ITERATION COUNT, LIMIT         0    2000000000
 
 IBM ILOG CPLEX   24.7.3 r58181 Released Jul 11, 2016 LEG x86 64bit/Linux      
@@ -113,7 +113,7 @@ Objective :         -65.333333
 **** REPORT SUMMARY :        0     NONOPT
                              0 INFEASIBLE
                              0  UNBOUNDED
-GAMS 24.7.3  r58181 Released Jul 11, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      09/10/16 14:33:47 Page 4
+GAMS 24.7.3  r58181 Released Jul 11, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      09/12/16 16:05:56 Page 4
 HW1-1
 E x e c u t i o n
 
@@ -124,7 +124,7 @@ E x e c u t i o n
             PARAMETER x3val                =        2.000  
 
 
-EXECUTION TIME       =        0.000 SECONDS      2 MB  24.7.3 r58181 LEX-LEG
+EXECUTION TIME       =        0.005 SECONDS      2 MB  24.7.3 r58181 LEX-LEG
 
 
 USER: GAMS Development Corporation, Washington, DC   G871201/0000CA-ANY
@@ -133,5 +133,5 @@ USER: GAMS Development Corporation, Washington, DC   G871201/0000CA-ANY
 
 **** FILE SUMMARY
 
-Input      /home/max/HWFall2016/Optimization/hw1/hw1-1.gms
-Output     /home/max/HWFall2016/Optimization/hw1/hw1-1.lst
+Input      /home/h/horowitz/HWFall2016/Optimization/hw1/hw1-1.gms
+Output     /home/h/horowitz/HWFall2016/Optimization/hw1/hw1-1.lst
