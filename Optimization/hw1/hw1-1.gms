@@ -27,9 +27,9 @@ eq2..
 eq3..
 -5 * x1 + 9 * x2 =g= 3;
 
-model topbrass /all/;
+model prob1 /all/;
 
-solve topbrass using lp minimize obj;
+solve prob1 using lp minimize obj;
 
 parameter x1val, x2val, x3val, objval;
 
