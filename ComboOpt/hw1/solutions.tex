@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage{amssymb}
+\newcommand*{\QEDA}{\hfill\ensuremath{\blacksquare}}%
+\title{Math 425 Assignment 1}
+\author{Max Horowitz-Gelb}
+\date{}
+\setlength{\parskip}{\baselineskip}%
+\setlength{\parindent}{0pt}
+\begin{document}
+\maketitle
+\section{}
+\section{}
+\textbf{Lemma A:}
+
+\textbf{Statement:} A connected subgraph of $n$ nodes requires at least $n-1$ edges.
+
+\textbf{Proof:} Consider a graph $G = (V,E)$. 
+
+Let $G_n$ be the set of all connected subgraphs of $G$ with $n$ nodes. And let $G'_n$ be a subgraph of $G_n$ such that the number of edges in $G'_n$ is minimized. Then let $E'_n = E(G'_n)$ and $V'_n = V(G'_n)$.
+
+First we shall consider the base case of $n = 1$ nodes. Here it is trivial to see by definition of a graph that $E'_1 = 0$. 
+
+Now assume that $E'_b = \alpha$. Then it must be true that $E'_{b+1} \geq \alpha + 1$ since for any subgraph in $G_b$, by definition of a graph, requires at least one new edge to connect a new node.
+
+Therefore $E'_n \geq n+1$, hence proving our statement. 
+\QEDA
+
+\textbf{Lemma 2.2}
+
+\textbf{Statement:}
+ 
+\end{document}
