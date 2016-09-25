@@ -27,6 +27,15 @@ Therefore $E'_n \geq n+1$, hence proving our statement.
 
 \textbf{Lemma 2.2}
 
-\textbf{Statement:}
+\textbf{Statement:} Let $G$ be a connected graph with $n$ nodes. Then $G$ is a spanning tree if and only if it has exactly $n-1$ nodes.
+
+\textbf{Proof:} Let $S_n$ be the set of all spanning trees of all subgraphs of $G$ containing $n$ nodes where a spanning tree is possible. Then let $|E_n|$ be the number of edges of used for each subgraph in $S_n$ assuming they are all the same. 
+
+Clearly $|E_1| = 0$ by definition of a graph.
+
+Then if $S_n = n-1$ then $S_{n+1} = n$. 
+This is because Lemma A implies $S_{n+1] \geq n$.     
+
+
  
 \end{document}
