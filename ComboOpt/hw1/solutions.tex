@@ -65,8 +65,12 @@ If $G$ were connected and not a tree then it must have a cycle. If it had a cycl
 \QEDA
 
 \section{}
+\textbf{Statement}: Let $H = (V,T)$ be a spanning tree of $G = (V,E)$. Let $e = vw$ be an edge in $E \backslash T$, and let $f$ be en edge of a simple path in H from $v$ to $w$. Then (a) the subgraph $H'$ obtained from adding $e$ has a unique cycle containing $e$, and (b) the subgraph $H'' = (V,T \cup \{e\} \backslash \{f\})$ is a spanning tree of $G$.
 
-\textbf{Statement}: Let $H = (V,T)$ be a spanning tree of $G = (V,E)$. Let $e = vw$ be an edge in $E \backslash T$, and let $f$ be en edge of a simple path in H from $v$ to $w$. Then (a) the subgraph $H'$ obtained from adding $e$ has a unique cycle containing $e$, and (b) 
+\textbf{Proof of (a):} First we can clearly see that since $H$ is a spanning tree then there is a path from $v$ to $w$ and then adding $e$ creates a cycle by definition. If adding $e$ created more than one unique cycle, that would imply that there exists at least two unique edge simple paths connecting $v$ to $w$ in $H$ which cannot be true since this would mean that there was a cycle in $H$ which is a tree. 
+
+\textbf{Proof of (b)} 
+
 
      
 
