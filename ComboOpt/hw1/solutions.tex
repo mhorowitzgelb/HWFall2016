@@ -105,6 +105,12 @@ Therefore $H''$ is a spanning tree.
 \textbf{Proof:} If the above statement were not true, this would imply that the $|\delta(A)|$ of $H$ was greater than $1$. But this can't be true because then there would be more than one unique edge simple paths between pairs of nodes in $H$ which breaks lemma D.
 \QEDA
 
+\textbf{Exercise 2.9}
+
+\textbf{Statement:} Let $G = (V,E)$ be a connected graph with costs $c_e, e \in E$. If $H = (V,T)$ is a MST of $G$, and $e \in T$ then there is a cut $D$ of $G$ with $e \in D$ and $c_e = min\{c_f : f \in D\}$.
+
+\textbf{Proof:} Let $e = (u,v)$ be given as described in the statement. Then let $A$ be the set of nodes connected to $u$ in $H$ via a simple path using $e$. Then let $D = \delta_G(A)$. Then by Lemma E if $a \in D$ then either $a = e$ or $a \notin T$. Therefore 
+$c_e = min\{c_f : f \in D\}$ since if this were not true, then we could create a spanning tree $H \cup \{f\} \backslash \{e\} : c_f < c_e$. This would be a spanning tree with less weight than $H$ which cannot be true since $H$ is a MST.
 
 
  
