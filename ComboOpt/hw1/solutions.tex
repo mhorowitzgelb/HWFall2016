@@ -81,7 +81,7 @@ Therefore for any pair of nodes in $H$ there is only one edge simple path betwee
 \QEDA
 
 
-
+\textbf{Lemma 2.7}
 
 \textbf{Statement}: Let $H = (V,T)$ be a spanning tree of $G = (V,E)$. Let $e = vw$ be an edge in $E \backslash T$, and let $f$ be en edge of a simple path in H from $v$ to $w$. Then (a) the subgraph $H'$ obtained from adding $e$ has a unique cycle containing $e$, and (b) the subgraph $H'' = (V,T \cup \{e\} \backslash \{f\})$ is a spanning tree of $G$.
 
@@ -95,9 +95,16 @@ First $e$ cannot introduce a cycle because if it did that would imply that there
 Again by Lemma D only all pairs of nodes in $H$ connected by a simple path containing $f$ will be disconnected in $H \backslash \{f\}$. Since $v$ and $w$ are connected in $H$ using a simple path containing $f$, then all the disconnected nodes in $H \backslash \{f\}$ must be connected to either $v$ or $w$. Then all nodes in $H \backslash \{f\}$ are connected to $v$ and or $w$. Therefore since in $H \cup \{e\} \backslash \{f\}$ $v$ and $w$ are connected, then all pairs of nodes are connected. 
 
 Therefore $H''$ is a spanning tree.
+\QEDA
 
+\section{}
+\textbf{Lemma E}
 
-     
+\textbf{Statement:} Let $H$ be a spanning tree of some graph $G$. Then let $e = (u,v)$ be some edge in $H$. Finally let $A$ be the set of all nodes in $H$ connected by a simple path including $e$  to $u$. Then $A$ is disconnected from $H \backslash A$ in the subgraph $H \backslash \{e\}$.
+
+\textbf{Proof:} If the above statement were not true, this would imply that the $|\delta(A)|$ of $H$ was greater than $1$. But this can't be true because then there would be more than one unique edge simple paths between pairs of nodes in $H$ which breaks lemma D.
+\QEDA
+
 
 
  
