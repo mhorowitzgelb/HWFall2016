@@ -20,21 +20,21 @@ Let $G_n$ be the set of all connected subgraphs of $G$ with $n$ nodes. And let $
 
 First we shall consider the base case of $n = 1$ nodes. Here it is trivial to see by definition of a graph that $E'_1 = 0$. 
 
-Now assume that $E'_b = \alpha$. Then it must be true that $E'_{b+1} \geq \alpha + 1$ since for any subgraph in $G_b$, by definition of a graph, requires at least one new edge to connect a new node.
+Now assume that $E'_b \geq \alpha$. Then it must be true that $E'_{b+1} \geq \alpha + 1$ since for any subgraph in $G_b$, by definition of a graph, requires at least one new edge to connect a new node.
 
-Therefore $E'_n \geq n+1$, hence proving our statement. 
+Therefore $E'_n \geq n-1$, hence proving our statement. 
 \QEDA
 
 \textbf{Lemma 2.2}
 
 \textbf{Statement:} Let $G$ be a connected graph with $n$ nodes. Then $G$ is a spanning tree if and only if it has exactly $n-1$ nodes.
 
-\textbf{Proof:} Let $S_n$ be the set of all spanning trees of all subgraphs of $G$ containing $n$ nodes where a spanning tree is possible. Then let $|E_n|$ be the number of edges of used for each subgraph in $S_n$ assuming they are all the same. 
+\textbf{Proof:} Let $S_n$ be the set of all subgraphs of $G$ that are spanning trees. Then let $|E_n|$ be the number of edges of used for each subgraph in $S_n$ assuming they are all the same. 
 
 Clearly $|E_1| = 0$ by definition of a graph.
 
 Then if $S_n = n-1$ then $S_{n+1} = n$. 
-This is because Lemma A implies $S_{n+1] \geq n$.     
+This is because Lemma A implies $S_{n+1} \geq n$.     
 
 
  
