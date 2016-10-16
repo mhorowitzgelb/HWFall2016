@@ -1,0 +1,24 @@
+Pre Problem 1
+I can tell that I should set firstfnx to False because when I set it to TRUE I get an energy function that is a mirror
+image of model twelve's potential function. Also since we are moving model B through model A we know that as a
+correlation integral is calculated through a fourier transform that we should take the conjugate of model B's function
+in fourier space.
+
+Pre Problem 2
+The correct choice is to fftshift the ifftfg grid since you never shift in fourier space as it will generate complete
+nonsense. Shifting fft2fg generates nonsense in the results. Shifting fft2g generates nonsense, but it is not used in
+later calculations so it is not visualized. Shifting fft2f surprisingly does not result in visual nonsense since
+apparently a shifted Dirac delta function in fourier space results in the exact same function.
+
+Final Part
+
+To implement the deliverable I created a for loop that iterated over all 8 45 degree rotations of molecule b. After
+each iteration of the for loop I ran a function called rotate which dotted all the position vectors of model b by a
+45 degree rotation matrix. At each iteration I populated another chart in the figure for the Energy grid with the
+current rotation. To incorporate steric repulsion into the energy calculation I created a fourth energy function
+index of 4 which was a sum of the first and third energy functions. To test the implementation I used the chiral
+molecule 12 and a diatomic molecule centered at (0,0). I looked at all the energy grids as the diatomic atom was rotated
+around. In this simple scenario it was easy to determine that the rotations and the new energy function were working
+correctly. One thing that I noticed was that it was challenging to completely remove false minima as a result of
+overlapping atoms. I had to mess around with the episilon value so that the steric repulsion overpowered the
+electrostatic interactions.
