@@ -1,0 +1,331 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html>
+<head>
+<title>Numerical Biology 606: HOMEWORK II</title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+</head>
+
+<body>
+<a name='top'></a>
+<h1>Numerical Biology 606: Homework II</h1>
+
+<h3>Part 1: Using Python to Explore a Protein Hinge</h3>
+
+In this exercise we will be working with the calmodulin structure from the PDB entry 4CLN.
+The structure of calmodulin consists of two small globular domains connected by an alpha helix.
+Both domains can bind up to two calcium ions each.
+The presence or absence of bound calcium will influence the flexibility of calmodulin and thereby
+modulate the binding of calmodulin to other proteins.
+In this manner, eukaryotic cells use calmodulin to regulate the behavior of various other proteins to which it can bind.
+Read more about calmodulin at <a href="http://en.wikipedia.org/wiki/Calmodulin" target="calw"> Wikipedia</a>.
+Also, check out the calmodulin entry
+at Proteopedia: <a href="http://www.proteopedia.org/wiki/index.php/Calmodulin" target="calp"> check it out!</a>.
+</p><p>
+
+A Python program called <code>simplehinge.py</code> is provided.
+This program uses a very simple model to simulate the interaction of the two domains during
+the hinge motion in the connecting helix.  By rotating about a Phi angle of a single specified
+residue in the hinge region, a series of conformations is generated.  Each conformation,
+is written to a single PDB file using the <code>MODEL</code> and <code>ENDMDL</code> PDB key words
+to separate each conformation.  This PDB file may then be read by PyMol to visualize the series of models
+as a movie. This program is intended to extensively demonstrate the use of the <code>PDButils</code>
+module for reading and writing PDB files, and to provide an example of how to use the information stored in the
+various data structures defined by this module.
+</p>
+<p>
+To run this program you must provide four pieces of information on the command line:
+<pre>
+   python simplehinge.py  "pdb_file_name"  "residue_number_to_rotate_phi"  "AngleDegreesStepSize" "IncludHetAtms"
+</pre>
+
+For example, using molecule 4cln.pdb, rotate about the Phi dihedral angle of residue 77 by increments of
+20 degrees and include heteroatoms in the output:
+<pre>
+   python simplehinge.py 4cln.pdb 77 20. T
+</pre>
+Or on Canopy, you will use the command:
+<pre>
+  %run simplehinge.py 4cln.pdb 77 20. T
+</pre>
+
+All of the residues after specified residue number will be rotated and all the residues before
+that residue will be left unchanged. You can also select which HETATM, to leave fixed or to rotate,
+but this feature is hardwired into the code. (see code)
+</p>
+
+<h3>Homework Assignment (Hinge):</h3>
+Your assignment is to run this program three times with different selections of the <code>residue_number_to_rotate_phi</code>
+input parameter.  For each run the program will write out a uniquely named PDB file containing all the models generated.
+You should view these files with <code>PyMol</code> and, to highlight the location of the calcium ions, you can
+<pre>
+@calmod_calciums.pml
+</pre>
+in the <code>PyMol</code> command entry window.
+</p>
+<p>
+You <b>must</b> use residue number 77 as one of your choices and 
+pick two other positions on the helix, one on each side of this. Use a step size of 15. The program may take a few minutes to run since there
+is a significant number of inter-atomic distance calculations that must be made to generate the inter-domain
+interactions. 
+
+You should keep <code>IncludHetAtms</code> flag set to <code>T</code> for all runs.
+After you have completed all three cases and examined the movies with <code>PyMol</code>, you will be ready for the
+main part of the homework assignment.
+</p><p>
+
+When you ran <code>simplehinge.py</code>, besides the PDB file, another file was automatically generated.
+This additional file contains the inter-domain interaction data which you are required to plot.
+Your assignment is to write a <b>Python program</b> to read in the interaction data files for residue 77 and the other residues you chose (with step size 15) and
+generate two graphs using <b><code>matplotlib</code></b>.
+
+One graph should compare the Coulomb repulsion terms for the three residues you chose, and the other should plot the number of atoms
+within the collision cut off, both as a function of rotation angle.
+The first data column in the txt files gives the rotation angle, use this as your
+x-axis for both graphs.
+The second column gives the calcium ion Coulomb term.  Use this as the y-axis in the first graph.
+For the second graph use the last column (nltcut) for the y-axis.  
+It would be good to plot the data points as symbols and draw a smooth
+curve through them.  Feel free to explore plotting options with matplotlib.
+</p>
+
+The file plot.py outlines the skeleton for the code required to generate the graphs. You will need to complete 3 sections of code in this file to make it work correctly
+
+<p>The Matplotlib home page may serve as a useful reference: <a href="http://matplotlib.sourceforge.net/" target="mplt"> (Visit)</a></p>
+</p>
+
+<h3>Deliverable (Hinge):</h3>
+You should save a copy of the graphs (preferably saved as .png files), the .txt file containing the data
+used to create the graphs, and a completed copy of the Python program you wrote to generate the graphs.  Please do
+not submit any PDB files.  All the required files should be combined into a single archive file using
+either <code>zip</code> or <code>tar</code>.  The archive file should then be uploaded into the <b>Homework 2</b>
+<b>Dropbox Folder</b> on the <b>Learn@UW</b> page for this class.   
+<p>
+</p>
+
+<h3>Part 2: Fourier Correlation Docking</h3>
+
+In this exercise your assignment is to write a two-dimensional docking program
+using Fourier correlation methods.
+You are provided with two Python programs.  The first program will help you understand
+the basic formalism of this method and is used to graphically display the various functions
+needed in this approach. The core of this program is basically a re-write in Python of the Matlab program
+presented in last Friday's lecture (October 8th). The second program demonstrates how you can caluculate the energy
+of interaction between two molecules using Equation 5.7 on page 73 of the course textbook.
+These programs should provide you with the basic building blocks for completing this assignment.
+
+Before describing more details regarding the assignment, you should test drive these
+programs and gain some understanding of how these programs work.
+
+<h3>Description of first program: <code>fouriercorr.py</code> </h3>
+
+To begin, try running the first program with the following input:
+<pre>
+    python fouriercorr.py
+</pre>
+<p>
+So you should see a list of the command line arguments.  There are many, so pay close attention to
+what they do.
+</p>
+<p>
+The first command line parameter is used to select one of the program's built-in models:
+<pre>
+    model=1 :  dipeptide contining THR 1 and THR 2 from PDB 1crn, used in demo last week (not centered)
+    model=2 :  two Ca++ ions 4 Angstroms apart, vertical with midpoint at origin
+    model=3 :  one Ca++ ion and one O-- ion 4 Angstroms apart, vertical with midpoint at origin, Ca on top
+    model=4 :  two O-- ions 4 Angstroms apart, vertical with midpoint at origin
+    model=5 :  two Ca++ ions 4 Angstroms apart, horizontal with midpoint at origin
+    model=6 :  one Ca++ ion and one O-- ion 4 Angstroms apart, horizontal with midpoint at origin, Ca on right
+    model=7 :  two O-- ions 4 Angstroms apart,  horizontal with midpoint at origin
+    model=8 :  single amino acid, GLU 23 from PDB 1crn, centered on CD, carboxylate carbon
+    model=9 :  single aminp acid, ARG 10 from PDB 1crn, centered on CZ, guanidinium carbon
+    model=10:  single Ca++ ion at origin
+    model=11:  single O-- ion at origin
+    model=12:  three Ca++ ions in an L shape configuration (a simple chiral molecule)
+</pre>
+</p>
+<p>
+The next three parameters define the potential energy function.<br>
+Here is the actual code to help you see what these three do:
+<pre>
+    if efunc == 1:
+    g = alpha / (r+eps)
+    elec = True
+    
+    elif efunc == 2:
+    g = numpy.exp(-alpha*r) / (r + eps)
+    elec = True
+    
+    elif efunc == 3:
+    r6term = (alpha/r+eps)**6
+    g = 2.* r6term * ( r6term - 2)
+    
+    igg = 0
+    for gg in g:
+    iv = 0
+    for v in gg:
+    #print igg,iv, g[igg,iv]
+    if v > 10.0:
+    g[igg,iv] = 10.0
+    iv += 1
+    igg += 1
+    elec = False
+</pre>
+As an example, if you use <code>2 1. .01</code> for arguments 2 through 4, you
+would select the second function using alpha as <code>1.</code> and eps as <code>.01</code>.
+</p>
+<p>
+The next three parameters after the three for the potential energy function,
+define the grid to be used for the 2D FFTs. Using <code>-10 10 .5</code>
+gives a square grid ranging from <code>-10</code> to <code>10</code> in steps of <code>0.5</code>.
+</p>
+<p>
+The very last parameter lets you pick one of the three available plotting options.  Plot option 1
+gives 3D surface plots and will take more time to run for large grids than the other two. Plot option 3
+is probably the most useful for trying to interpret locations for various features - you can use the
+tool with the magnifying glass to pull a rectangle around a region of intereset for closer inspection.
+Clicking the Home icon resets the plot.
+</p>
+<p>
+Now try:
+<pre>
+    python fouriercorr.py 8 2 1. .01 -10 10 .5 3
+</pre>
+</p>
+<p>
+Next try:
+<pre>
+    python fouriercorr.py 8 3 3. .5 -10 10 .5 3
+</pre>
+<p>
+Note that you can display more than one on the screen at a time.  This is often useful when
+trying to examine how changing parameters affects the function.  One way to do this is to open multiple
+terminal windows and run one from each.  Note that you must click on the top-left, red button
+to terminate the Python script.
+</p>
+<p>
+Try some different parameters on your own and see how things work.  Read carefully the "Fourier Correlation Docking"
+section in Chapter 5 and try to indentify the various transforms from the equations.
+</p>
+
+<h3>Description of second program: <code>fouriercorr_energy.py</code> </h3>
+The second program has exactly the same input parameters as the first program except there is
+one additional parameter at the end.  This last parameter specifies the a second model for calculating the
+energy function.
+To begin, try running the first program with the following input:
+<pre>
+    python fouriercorr_energy.py
+</pre>
+Cut and paste the two examples from the help page.
+Note that the plots represent the interaction energy for all locations within the specified grid.
+The best "docking" positions are the ones with the lowest energy, which should be negative.
+Try using some of the very simple
+single, double, or triple ions models to see if the lowest energy points make sense.
+<p>
+<h4>Pre-Homework Problem</h4>
+Look through the source code <code>fouriercorr_energy.py</code> and locate the the section
+that reads as:
+<pre>
+    ########################################################################################
+    #  HOMEWORK QUESTION 1: DETERMINE THE CORRECT CORRELATION FUNCTION:
+    ########################################################################################
+    
+    # SHOULD "firstfnx" be set to True of False?
+    
+    firstfnx = False
+    firstfnx = True
+    
+    if firstfnx:
+    fft2E = fft2fB*numpy.conj(fft2fgA)
+    else:
+    fft2E = numpy.conj(fft2fB)*fft2fgA
+    
+    ########################################################################################
+    ########################################################################################
+</pre>
+Recall that determining a correlation function is slightly different than the convolution in that
+you must take the complex conjugate of one of the functions within the pair.  Which one?  You can
+"experimentally" determine the correct one by using a chiral molecule and see if the proper hand is preserved
+in the locations of the energy function minima.  Recall that the model 12 provides a simple example of a chiral molecule.
+Use an oppositely charged diatomic model and test the two cases to discover the correct definition of <code>fft2E</code>.
+<p>
+Write a short paragraph explaining your findings.
+</p>
+<h4>Pre-Homework Problem</h4>
+Nearby in the source code of <code>fouriercorr_energy.py</code> you'll find:
+<pre>
+    ########################################################################################
+    #  HOMEWORK QUESTION 2: WHEN SHOULD WE APPLY THE FOLLOWING SHIFT TRANSFORMATIONS?
+    #  WHEN SHOULD WE NOT APPLY THE SHIFT TRANSFORMATIONS?
+    ########################################################################################
+    
+    #fft2f = numpy.fft.fftshift(fft2f)
+    #fft2g = numpy.fft.fftshift(fft2g)
+    #fft2fg = numpy.fft.fftshift(fft2fg)
+    #ifftfg = numpy.fft.fftshift(ifftfg)
+</pre>
+When working with FFT's it is easy to get confused about when the transform should be shifted or not.
+Maybe <code>Google</code> about this problem, and see if you can learn what it's all about.  Then, try
+removing the comments and run some of more "experiments" to observe what happens.  A good test case is to use
+Model 8 for the fixed molecule and Model 10 as a moving probe to find where the calcium ion "sticks" to glutamic acid.
+You should notice something wrong when the wrong choice is made.
+<p>
+Write a short paragraph explaining your findings.
+</p>
+<h3>Homework (Fourier)</h3>
+Now that you have gained some familiarity with the key concepts of Fourier correlation docking,
+you are ready for the main homework assignment.  There are two key issues which you will be asked
+to address by building a new Python program, using and modifying sections of code from <code>fouriercorr_energy.py</code>.
+<p>
+</p>
+The first issue is that only the translational search is made with the current version of <code>fouriercorr_energy.py</code>.
+You should write additional code to rotate a chosen moving model into new orientations, keeping the same center, and run the
+translational search for each orientation.  You are not expected to sample rotation space using a fine rotation step size, something
+like 45 degrees is good enough for demonstration.
+</p>
+<p>
+The second issue involves modifying the program to avoid finding energy minima which involve overlapping atoms between the
+two molecules.  Recall that the single calcium ion stuck directly on to the glutamic acid oxygens when using the point charge
+forces (1 or 2).  To avoid this problem you must build in steric repulsion by adding energy function 3 to the total energy.  Recall or revisit
+the two demos you first ran for <code>fouriercorr_energy.py</code>.  By combining these two functions you should try to remove
+the false minima observed when using only the point charge models.
+</p>
+<p>
+Once both of these upgrades have been made, try to see if your program can locate the
+salt-bridge between glutamic acid (8) and arginine (9).
+</p>
+
+<h3>Deliverable (Fourier):</h3>
+Please include a short write-up including your answers to the two mini-questions and a brief description of
+of how you implemented the Main Homework Problem.  Mention which test cases you used and include any other comments
+or observations relevant to your program which you'd like to make.
+Any legible format is acceptable for this, yes, even a text file.  Also include your final Python program.
+<p>
+</p>
+Combine the two files into a single archive file using
+either <code>zip</code> or <code>tar</code>.  The archive file should then be uploaded into the <b>Homework 2</b>
+<b>Dropbox Folder</b> on the <b>Learn@UW</b> page for this class.
+<p>
+<h3>Note about Screen size adjustment</code> </h3>
+The size of the graphics window is set inside the program with the code:
+<pre>
+    #bigscreen = False  # For most Laptops
+    bigscreen = True   # For Imacs and comparable sized displays
+</pre>
+You should adjust this for the computer you are using if necessary.
+</p>
+<p>
+If the built-in settings toggled with the above switch do not produce a desired result,
+you will have to tweak another section of code:
+<pre>
+    #
+    # Overall size of figure, adjust for your screen:
+    #
+    if bigscreen:
+    fig = plt.figure(figsize=(18.,6.6))
+    else:
+    fig = plt.figure(figsize=(15.,7.8))
+</pre>
+Try to select a ratio so that the plots remain more or less square.
+</p>
+</body></html>
+

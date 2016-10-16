@@ -216,18 +216,23 @@ for iresnum in resnumsinchain:
       # Psi: dihedral angle of N(i)-Ca(i)---C(i)-N(i+1)
       #-----------------------------------------------------------------------
 
-      n_CA1_C1_N2 = cross( bnd_CA1_C1, bnd_C1_N2 )
-      n_CA1_C1_N2 = n_CA1_C1_N2 / linalg.norm( n_CA1_C1_N2 )     
 
-      n_N1_CA1_C1 = cross(bnd_N1_CA1, bnd_CA1_C1)
-      n_N1_CA1_C1 = n_N1_CA1_C1 / linalg.norm(n_N1_CA1_C1)
       #
       #  HOME WORK PROBLEM:  WRITE CODE TO CALCULATE Psi
       #
       ################################################################################
 
+      n_CA1_C1_N2 = cross(bnd_CA1_C1, bnd_C1_N2)
+      n_CA1_C1_N2 = n_CA1_C1_N2 / linalg.norm(n_CA1_C1_N2)
+
+      n_N1_CA1_C1 = cross(bnd_N1_CA1, bnd_CA1_C1)
+      n_N1_CA1_C1 = n_N1_CA1_C1 / linalg.norm(n_N1_CA1_C1)
+
       Psi = -777.0  # set a temporary default value
       Psi = rad2deg * acos(dot(n_N1_CA1_C1,n_CA1_C1_N2))
+
+      cross_check = cross(n_N1_CA1_C1, n_CA1_C1_N2)
+      if dot(bnd_CA1_C1,cross_check) < 0 : Psi = -Psi
 
       #-----------------------------------------------------------------------
       # Omega: dihedral angle of Ca(i)-C(i)===N(i+1)-Ca(i+1)
