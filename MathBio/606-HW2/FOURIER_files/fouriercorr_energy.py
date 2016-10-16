@@ -379,7 +379,7 @@ def fouriercorr(efunc, alpha, eps, ub, lb, step):
    #  WHEN SHOULD WE NOT APPLY THE SHIFT TRANSFORMATIONS?
    ########################################################################################
 
-   #fft2f = numpy.fft.fftshift(fft2f)
+   fft2f = numpy.fft.fftshift(fft2f)
    #fft2g = numpy.fft.fftshift(fft2g)
    #fft2fg = numpy.fft.fftshift(fft2fg)
    #ifftfg = numpy.fft.fftshift(ifftfg)
@@ -400,7 +400,7 @@ xB,yB,fB,gB,fft2fB,fft2gB,fft2fgB,ifftfgB = fouriercorr( efunc, alpha0, eps0, ub
 # SHOULD "firstfnx" be set to True of False?
 
 firstfnx = False
-firstfnx = True
+
 
 if firstfnx:
    fft2E = fft2fB*numpy.conj(fft2fgA)

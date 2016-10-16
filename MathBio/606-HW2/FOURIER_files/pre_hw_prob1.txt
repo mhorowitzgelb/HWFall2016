@@ -1,0 +1,4 @@
+I can tell that I should set firstfnx to False because when I set it to TRUE I get an energy function that is a mirror
+image of model twelve's potential function. Also since we are moving model B through model A we know that as a
+correlation integral is calculated through a fourier transform that we should take the conjugate of model B's function
+in fourier space.

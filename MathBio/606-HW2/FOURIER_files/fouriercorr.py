@@ -364,6 +364,7 @@ def fouriercorr(efunc, alpha, eps, ub, lb, step):
    fft2g = numpy.fft.fft2(g)
    fft2fg = fft2f*numpy.conj(fft2g)
    ifftfg = numpy.fft.ifft2(fft2fg)
+   ifftfg = numpy.fft.fftshift(ifftfg)
 
    # fix offset issue for discrete FFT
    # note that numpy has a built-in function for this (fftshift)

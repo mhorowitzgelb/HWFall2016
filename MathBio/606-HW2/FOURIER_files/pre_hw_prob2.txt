@@ -1,0 +1,4 @@
+The correct choice is to fftshift the ifftfg grid since you never shift in fourier space as it will generate complete
+nonsense. Shifting fft2fg generates nonsense in the results. Shifting fft2g generates nonsense, but it is not used in
+later calculations so it is not visualized. Shifting fft2f surprisingly does not result in visual nonsense since
+apparently a shifted Dirac delta function in fourier space results in the exact same function.
