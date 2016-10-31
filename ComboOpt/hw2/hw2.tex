@@ -1,0 +1,42 @@
+\documentclass{article}
+\title{Math 425 Assignment 2}
+\author{Max Horowitz-Gelb, Tushar Verma}
+\date{October 30, 2016}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmin}{argmin}
+
+\begin{document}
+\maketitle
+\section{}
+\includegraphics[scale=0.5]{tree}
+
+In this figure the minimum spanning tree is labeled with blue lines and the tree created of least cost dipaths is labeled with red lines. These two trees are clearly different from eachother. As one can see the MST does not contain all least cost dipaths since the cost from $r$ to the bottom right node is of cost 3 and there is a cheaper path of cost 2. Conversely the cost of the tree made from the minimum cost dipaths is of cost 5 but the MST is of cost 4, therefore the minimum dipath tree is not an MST.
+\section{}
+Given a digraph $G = (V,E)$, costs $c_e$ for every $e \in E$ and disjoint sets $R,S \subset V$. Then the problem of finding a least cost dipath starting from any node in $R$ and ending in any node in $S$ can be reduced to solving one ordinary shortest path problem by lightly modifying $G$. Simply make a new graph by adding a special node $\gamma$ to $V$ and edges from $\gamma$ to all nodes in $R$, all with cost $0$. Call this new graph  $G'$.
+
+If G has no negative cost dicircuits, then if we run ordinary least cost dipaths on $G'$ with $r = \gamma$ and achieve a feasible potential $y$ and least cost paths
+described by 
+$p$, our least cost dipath from $R$ to $S$ in $G$ is a dipath that ends in $t = \argmin\limits_{v \in S} y_v$. Its cost is $y_t$ and its path is described by $p(f)$ with node $\gamma$ and edge containing $\gamma$ removed.
+
+First note that $G$ has no negative cost dicircuits if and only if $G'$ does not either since $\gamma$ has only outgoing edges and cannot introduce any new circuits.
+
+We shall prove this is valid via contradiction. Assume that there exists a path from node $a \in R$ to $b \in S$ in $G$ with less cost than any path found from ordinary least cost dipaths on $G'$. Then $y_b$ would be greater than the cost of this path. But there there is a 0 cost edge from $\gamma$ to $a$ making $y_a = 0$ so if such a path existed then it would give a lower cost path from $\gamma$ to $b$. Since $G$ is a subgraph of $G'$ this creates a contradiction. 
+
+Finally if $G$ had a negative cost dicircuit then so would $G'$ and running ordinary least cost dipaths on $G'$ would discover this. This would imply there is no solution to the problem.
+ 
+\section{}
+Suppose that we are give a shortest path problem on a digraph $G$ such that a node $w\neq r$ is incident with two arcs $a$ and $b$. Then we can answer the problem with a smaller digraph in three different ways. 
+
+If $w$ has only outgoing arcs, then clearly there is no path from $r$ to $w$. 
+Hence we can solve the shortest dipath problem on $G$ with $w$ removed and then simply set $y_w = \inf$ and $p(w) = -1$. 
+
+If $w$ has only incoming arcs, then clearly there is no path from $r$ to $v$ where $v \neq w$ and $w$ is in said path. Then let $a = \alpha w$ and $b = \beta w$. Then we may again remove $w$ from $G$ and solve for the least cost dipaths to aquire $y$ and $p$. 
+Then $y_w = min \{ y_\beta + c_b, y_\alpha + c_a\} $ and
+$p(w) = v$ such that $(v,e) \in \{(\alpha,a), (\beta,b)\}$ and $y_w = y_v + c_e$.
+
+If $w$ has one incoming arc and one outgoing arc, then we can combine those arcs into a single arc to solve a smaller problem.
+
+
+\end{document}
+

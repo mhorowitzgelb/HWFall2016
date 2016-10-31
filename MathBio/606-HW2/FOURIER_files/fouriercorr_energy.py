@@ -15,44 +15,34 @@ bigscreen = True   # For Imacs and comparable sized displays
 
 def help_page():
    help = '''
-   You must use 9 command line arguments:
+   You must use 7 command line arguments:
        1   built-in model number for Fixed molecule
-       2   energy function number 1 for Coulomb, 2 for attenuated Coulomb, 3 for LJ6-12
-       3   alpha value
-       4   epsilon value (add to 1/r to give 1 / (r+epsilon) ) use small nonnegative value
-       5   grid lowest value
-       6   grid highest value
-       7   grid step size
-       8   plot option: 1 for full 3D, 2 for contour lines, 3 for filled contour
-       9   built-in model number for Moved molecule
+       2   alpha value
+       3   epsilon value (add to 1/r to give 1 / (r+epsilon) ) use small nonnegative value
+       4   grid lowest value
+       5   grid highest value
+       6   grid step size
+       7   built-in model number for Moved molecule
 
    For example:
 
-   python fouriercorr_energy.py 8 2 0.75 .01 -10 10 .5 1 9
-
-   or
-
-   python fouriercorr_energy.py 8 3 3.00 0.5 -10 10 .5 1 9
-
-
+   python fouriercorr_energy.py 8 0.75 .01 -10 10 .5 9
    '''
    print help
 
-if len(sys.argv) < 10:
+if len(sys.argv) != 8:
    print
-   print "Error: not enough command line arguments used."
+   print "Error: Incorrect number of args used"
    help_page()
    sys.exit(2)
 
 modelA  = int(sys.argv[1])
-efunc  = int(sys.argv[2])
-alpha0 = float(sys.argv[3])
-eps0   = float(sys.argv[4])
-lb0    = int(sys.argv[5])
-ub0    = int(sys.argv[6])
-step0  = float(sys.argv[7])
-plotoption = int(sys.argv[8])
-modelB  = int(sys.argv[9])
+alpha0 = float(sys.argv[2])
+eps0   = float(sys.argv[3])
+lb0    = int(sys.argv[4])
+ub0    = int(sys.argv[5])
+step0  = float(sys.argv[6])
+modelB  = int(sys.argv[7])
 
 maintitle =  "molecule model A: " + sys.argv[1] + ", "
 maintitle += "molecule model B: " + sys.argv[9] + ", "
@@ -65,8 +55,6 @@ maintitle += "step: " + sys.argv[7]
 
 print 'using fixed molecule model:', modelA
 print 'using moved molecule model:', modelB
-print 'using energy function:', efunc
-print 'plotoption: ', plotoption
 print
 
 def get_molecule_model(model):
@@ -265,13 +253,12 @@ def rotate():
 
 
 
-def fouriercorr(efunc, alpha, eps, ub, lb, step):
+def fouriercorr(alpha, eps, ub, lb, step):
 
    #
    # Mess with these numbers to get nice region
    #
    print "fouriercorr options set to:"
-   print '  efunc:', efunc
    print '  alpha:', alpha
    print '  eps:  ', eps
    print '  lb:   ', lb
@@ -313,41 +300,24 @@ def fouriercorr(efunc, alpha, eps, ub, lb, step):
    x,y = numpy.meshgrid( xgrid, ygrid )
    r = numpy.sqrt( x**2 + y**2 )
 
-   # define fundamental function
-   # (add "eps" to r in 1/r to avoid singularity and keep from getting too large for plot)
-   # doing electrostatics?
+#Only using single energy function that is a sum of function 1 and 3
 
-   if efunc == 1:
-       g = alpha / (r+eps)
-       elec = True
+   r6term = (alpha/r+eps)**6
+   g = 2.* r6term * ( r6term - 2)
 
-   elif efunc == 2:
-       g = numpy.exp(-alpha*r) / (r + eps)
-       elec = True
+   igg = 0
+   for gg in g:
+    iv = 0
+    for v in gg:
+       #print igg,iv, g[igg,iv]
+       if v > 10.0:
+          g[igg,iv] = 10.0
+       iv += 1
+    igg += 1
 
-   elif efunc == 3 or efunc == 4:
-       r6term = (alpha/r+eps)**6
-       g = 2.* r6term * ( r6term - 2)
+   elec = True
+   g = g + alpha / (r + eps)
 
-       igg = 0
-       for gg in g:
-          iv = 0
-          for v in gg:
-             #print igg,iv, g[igg,iv]
-             if v > 10.0:
-                g[igg,iv] = 10.0
-             iv += 1
-          igg += 1
-       elec = False
-       if efunc == 4:
-          elec = True
-          g = g + alpha / (r + eps)
-
-
-
-   else:
-      print "Error: no energy function for efunc =", efunc
-      sys.exit(3)
 
    gmin = g.min()
    gmax = g.max()
@@ -361,7 +331,7 @@ def fouriercorr(efunc, alpha, eps, ub, lb, step):
       print
       sys.exit(6)
 
-   if efunc ==3 and gmin > 0.0:
+   if gmin > 0.0:
       print "WARNING: LJ 6-12 potential is strictly positive, no obvious well."
 
    debug = False
@@ -413,7 +383,7 @@ def fouriercorr(efunc, alpha, eps, ub, lb, step):
    return x, y, f, g, fft2f, fft2g, fft2fg, ifftfg
 
 atoms, imodx, imody = get_molecule_model(modelA)
-xA,yA,fA,gA,fft2fA,fft2gA,fft2fgA,ifftfgA = fouriercorr( efunc, alpha0, eps0, ub0, lb0, step0 )
+xA,yA,fA,gA,fft2fA,fft2gA,fft2fgA,ifftfgA = fouriercorr(alpha0, eps0, ub0, lb0, step0 )
 
 atoms, imodx, imody = get_molecule_model(modelB)
 
@@ -433,7 +403,7 @@ for rot_i in range(0,8):
 
    print atoms[0]
 
-   xB,yB,fB,gB,fft2fB,fft2gB,fft2fgB,ifftfgB = fouriercorr( efunc, alpha0, eps0, ub0, lb0, step0 )
+   xB,yB,fB,gB,fft2fB,fft2gB,fft2fgB,ifftfgB = fouriercorr(alpha0, eps0, ub0, lb0, step0 )
 
 
    ########################################################################################
