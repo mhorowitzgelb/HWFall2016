@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html>
+<head>
+    <title>Math/Biochem 606: HW3</title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+</head>
+
+<body>
+<a name='top'></a>
+<h1>Math/Biochem 606: HW3</h1>
+
+<h2>Using Gradient Descent to Determine the Energy Minima of Two Interacting Molecules</h2>
+<p>
+With the two-dimensional molecular models from the previous Homework 3, you will
+use the Gradient Descent minimization method to find minima in the interaction
+energy function between two molecules.  The Python program included, <code>energyAB2.py</code>,
+will provide you with the basis for visualizing your results. To see examples of how to
+use this program, run the program without any command line arguments and read the resulting message:
+<pre>
+python energyAB2.py
+</pre>
+Note that this program allows you to fine-tune the Van der Waals potential (6-12) parameters.
+These can be important for getting clear minima in the energy function,
+ and before running your Gradient Descent program, you should
+use this program to select a good set of parameters for a given model pair.
+</p>
+<p>
+You should review the lecture notes describing the Gradient Descent method in Section 7.2.
+</p>
+
+<h3>Simple Intro to Gradient Descent</h3>
+<p>
+Based on a Python program from
+the Wikipedia page <a href="http://en.wikipedia.org/wiki/Gradient_descent" target="gdwik">Gradient Descent</a>,
+the following code will help you understand this method:
+<pre>
+#------------------------------------------------------------------------
+# BASED ON CODE FROM: http://en.wikipedia.org/wiki/Gradient_descent
+#
+#   f(x)=x**4-3*x**3+2 , with derivative f'(x)=4*x**3-9*x**2
+
+import sys
+
+if len(sys.argv) > 1:
+   alpha = float(sys.argv[1])
+else:
+   # default step size
+   alpha = 0.01
+
+# From calculation, we expect that the local minimum occurs at x=9/4
+
+xOld = 0
+xNew = 6 # The algorithm starts at x=6
+
+precision = 0.00001
+ 
+def f_prime(x):
+    return 4 * x**3 - 9 * x**2
+ 
+istep = 0
+while abs(xNew - xOld) > precision:
+    xOld = xNew
+    grad = f_prime(xNew)
+    xNew = xOld - alpha * grad
+    istep += 1
+    print istep, "xOld,xNew,grad:", xOld,xNew,grad
+
+print("Local minimum occurs at ", xNew)
+#------------------------------------------------------------------------
+</pre>
+<h3>Exercise: A Simple one-D Gradient Descent</h3>
+The above program allows you to specify a value for alpha on the command line.
+Note that this alpha is the step size in the Gradient Descent and has nothing directly to do with
+what we called alpha in the potential functions in the FFT programs.
+Either find the file <code>simple_gradient_descent.py</code> included with the homework download
+or cut and paste this code into a file and try running it:
+<pre>
+python simple_gradient_descent.py 0.01
+</pre>
+Now try some different alphas, say 0.001, 0.015, and  0.02.
+What do these results tell you about the importance of alpha?
+</p>
+
+<h3>Main Homework Problem</h3>
+<p>
+In the previous Homework 3 assignment you generated <emp>maps</em> of the 2D energy landscape for two
+interacting molecules using FFT methods.  The program provided, <code>energyAB2.py</code>, allows
+you to visualize this landscape and also determines the global energy minimum and marks them in
+the figure.   Additionally, this program will write out transformed versions of the PDB file when
+the amino acid test models 8 and 9 (or their side chain only versions, 18 and 19) are used.  This allows
+you to directly look at the configurations of the molecules in the observed minimum energy location.
+In addition, this program calculates the energy minimum using the discrete sum forms of the energy function
+and compares this minimum to the FFT minimum energy location.
+</p>
+<p>
+In this homework assignment you will use the same model systems
+and energy functions as before, but instead of using FFTs,
+you will use direct evaluation of the energy function and its derivatives in order to implement
+the Gradient Descent method.  Using pieces of the program provided, <code>energyAB2.py</code>,
+you will see how the energy is directly calculated from the summation over all atom pairs between the
+two molecules.  In addition to the energy function itself, you will need to calculate the first-order derivatives
+of the energy function.  Once you have written these functions, you will be ready to set-up the Gradient Descent
+program.
+</p>
+<p>
+Your program should allow you to enter a starting x,y position to begin the search and also an
+alpha value (step size).  After you determine a minimum configuration for
+a given test pair, use <code>energyAB2.py</code> to view the
+location of your minimum and see if it is consistent with the landscape.  You should make a minor
+modification to <code>energyAB2.py</code> to read-in the location
+of your minimum and mark it on the plot. (The code already
+does this sort of mark-up for the FFT minimum so this should be relatively easy.)
+</p>
+<p>
+It would also be worthwhile to record the trajectory of the minimization steps
+and plot the path on the landscape plot, though this is not required. This would be a useful aid
+in selecting a good alpha (step size) and might end up saving you time.  An alternative would be to use your
+plotting skills from Homework 2 to plot these convergence (or non-convergence) paths directly from your
+Gradient Descent program.  By doing a side-by-side comparison of this simpler plot with the landscape plot
+you can judge whether or not the path truly converges toward the nearest minimum.
+</p>
+<p>
+Hand in your code and for the write-up, give a list of some of the molecule pairs you tested with a brief
+description of what you concluded from each test pair.  For each test you report, provide all the input parameters
+so that your program can be re-run by someone else in order to re-generate the results.
+</p>
+</body></html>

@@ -1,0 +1,2 @@
+Exercise Simple Gradient Descent:
+When setting the alpha value, if it is set too high it will overshoot the globalminimum and get stuck at a plateau to  the left.
