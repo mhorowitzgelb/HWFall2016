@@ -365,7 +365,7 @@ def EnergyPair(alpha, eps, efunc, q1, q2, x1, x2, rAB):
 
 	x12 = abs(x2 - x1 + rAB)
 	d2 = x12 ** 2
-	r12 = math.sqrt(numpy.sum(d2))
+	r12 = numpy.sqrt(numpy.sum(d2))
 	E12 = 0.0
 
 	if efunc == 1 or efunc == 4:
@@ -378,7 +378,8 @@ def EnergyPair(alpha, eps, efunc, q1, q2, x1, x2, rAB):
 		# Equation 3.11  (with eps added in)
 		r6term = (sigmaVdW / (r12 + eps)) ** 6
 		Evdw = ConVdW * r6term * (r6term - 1.)
-		Evdw = min(Evdw, topval_VderWaals)
+		if Evdw > topval_VderWaals:
+			Evdw = topval_VderWaals
 		E12 += Evdw
 
 	return E12
@@ -388,6 +389,7 @@ def GradEnergyPair(alpha, eps, efunc, q1, q2, x1, x2, rAB):
 	if efunc < 1 or efunc > 5:
 		print "Error in EnergyPairGradient: no energy function for efunc = ", efunc
 		sys.exit(3)
+
 
 	x12 = abs(x2 - x1 + rAB)
 	d2 = x12 ** 2
@@ -402,13 +404,18 @@ def GradEnergyPair(alpha, eps, efunc, q1, q2, x1, x2, rAB):
 	r1 = rAB[0]
 	r2 = rAB[1]
 	if efunc == 1 or efunc == 4:
+		'''
 		eleGrad = numpy.array([
-			-(5841724629778537. * alpha * q1 * q2 * (2 * r1 - 2 * x11 + 2 * x21)) / (
-			35184372088832. * ((r1 - x11 + x21) ** 2 + (r2 - x12 + x22) ** 2) ** (0.5) * (
+			-(166.0318 * alpha * q1 * q2 * (2 * r1 - 2 * x11 + 2 * x21)) / (
+			((r1 - x11 + x21) ** 2 + (r2 - x12 + x22) ** 2) ** (0.5) * (
 			eps + ((r1 - x11 + x21) ** 2 + (r2 - x12 + x22) ** 2) ** (0.5)) ** 2),
-			-(5841724629778537. * alpha * q1 * q2 * (2 * r2 - 2 * x12 + 2 * x22)) / (
-			35184372088832. * ((r1 - x11 + x21) ** 2 + (r2 - x12 + x22) ** 2) ** (0.5) * (
+			-(166.0318 * alpha * q1 * q2 * (2 * r2 - 2 * x12 + 2 * x22)) / (
+			((r1 - x11 + x21) ** 2 + (r2 - x12 + x22) ** 2) ** (0.5) * (
 			eps + ((r1 - x11 + x21) ** 2 + (r2 - x12 + x22) ** 2) ** (0.5)) ** 2)
+		])'''
+		eleGrad = numpy.array([
+			-332.0636 * alpha * q1 * q2 * (x21 - x11 + r1) / (r12 * (r12 + eps)**2),
+			-332.0636 * alpha * q1 * q2 * (x22 - x12 + r2) / (r12 * (r12 + eps)**2)
 		])
 	elif efunc == 2 or efunc == 5:
 		eleGrad = numpy.array([
@@ -422,12 +429,18 @@ def GradEnergyPair(alpha, eps, efunc, q1, q2, x1, x2, rAB):
 		if Evdw > topval_VderWaals:
 			vdwGrad = numpy.array([0,0])
 		else:
+			xterm = (x21-x11 + r1)
+			yterm = (x22 - x12 + r2)
 			vdwGrad = numpy.array([
+				ConVdW * (6*sigmaVdW**6*(xterm/(r12*(r12+eps)**7)) - 12*sigmaVdW**12*(xterm/(r12*(r12+eps)**13))),
+				ConVdW * (6*sigmaVdW**6*(yterm/(r12*(r12+eps)**7)) - 12*sigmaVdW**12*(yterm/(r12*(r12+eps)**13)))
+			])
+			'''
+				numpy.array([
 				- (3*ConVdW*sigmaVdW**12*(2*r1 - 2*x11 + 2*x21))/(((r1 - x11 + x21)**2 + (r2 - x12 + x22)**2)**(0.5)*(eps + ((r1 - x11 + x21)**2 + (r2 - x12 + x22)**2)**(0.5))**13) - (3*ConVdW*sigmaVdW**6*(sigmaVdW**6/(eps + ((r1 - x11 + x21)**2 + (r2 - x12 + x22)**2)**(0.5))**6 - 1)*(2*r1 - 2*x11 + 2*x21))/(((r1 - x11 + x21)**2 + (r2 - x12 + x22)**2)**(0.5)*(eps + ((r1 - x11 + x21)**2 + (r2 - x12 + x22)**2)**(0.5))**7),
 				- (3*ConVdW*sigmaVdW**12*(2*r2 - 2*x12 + 2*x22))/(((r1 - x11 + x21)**2 + (r2 - x12 + x22)**2)**(0.5)*(eps + ((r1 - x11 + x21)**2 + (r2 - x12 + x22)**2)**(0.5))**13) - (3*ConVdW*sigmaVdW**6*(sigmaVdW**6/(eps + ((r1 - x11 + x21)**2 + (r2 - x12 + x22)**2)**(0.5))**6 - 1)*(2*r2 - 2*x12 + 2*x22))/(((r1 - x11 + x21)**2 + (r2 - x12 + x22)**2)**(0.5)*(eps + ((r1 - x11 + x21)**2 + (r2 - x12 + x22)**2)**(0.5))**7)
-
-
 			])
+			'''
 	else:
 		vdwGrad = numpy.array([0,0])
 	return eleGrad + vdwGrad
@@ -451,6 +464,21 @@ def EnergyInterMol(molA, molB, efunc, alpha, eps, rAB):
 			qj = atomsB[j][3]
 			E_AB += EnergyPair(alpha, eps, efunc, qi, qj, xi, xj, rAB)
 	return E_AB
+
+def GradEnergyInterMol(molA, molB, efunc, alpha, eps, rAB):
+	(atomsA, imodxA, imodyA) = molA
+	(atomsB, imodxB, imodyB) = molB
+
+	GradE_AB = 0.0
+	for i in range(0, len(atomsA)):
+		xi = numpy.array([atomsA[i][imodxA], atomsA[i][imodyA]])
+		qi = atomsA[i][3]
+		for j in range(0, len(atomsB)):
+			xj = numpy.array([atomsB[j][imodxB], atomsB[j][imodyB]])
+			qj = atomsB[j][3]
+			GradE_AB += GradEnergyPair(alpha, eps, efunc+3, qi, qj, xi, xj, rAB)
+	return GradE_AB
+
 
 
 def fourierTwoPots(mol, efunc, alpha, eps, ub, lb, step):
@@ -815,6 +843,31 @@ if __name__ == '__main__':
 				iyAB += 1
 			ixAB += 1
 
+		'''
+		Do Grad Descent to find minimum
+		'''
+
+		step_size = 0.0001
+		precision = 0.000001
+		steps = 0
+
+		gradX = numpy.array([ -3.5, -4.5])
+		trajX = [gradX[0]]
+		trajY = [gradX[1]]
+		energyOld = 1
+		energyNew = 0
+		while abs(energyNew - energyOld) > precision:
+			energyOld = energyNew
+			steps += 1
+			print "Running gradient descent step ", steps
+			gradX -= step_size * GradEnergyInterMol(mA,mB,efunc,alpha,eps,gradX)
+			##trajX.append(gradX[0])
+			#trajY.append(gradX[1])
+			energyNew = EnergyInterMol(mA,mB,efunc+3,alpha,eps,gradX)
+
+
+
+		print 'Min GradE: ', energyNew, 'at ', gradX
 		print "Min AB:", minEAB, 'at', min_xAB, min_yAB
 		print "Max AB:", maxEAB, 'at', max_xAB, max_yAB
 		print "Min fft:", minEfft, 'at', min_xfft, min_yfft
@@ -887,6 +940,7 @@ if __name__ == '__main__':
 
 		ax = fig.add_subplot(2, 3, 3)
 		surf3 = ax.contourf(x, y, numpy.real(Etot), cmap=cm.RdBu, linewidth=0, antialiased=True)
+		ax.plot(trajX, trajY)
 
 		if CheckEnergy:
 			ax.set_title("Direct_E_tot")
@@ -895,7 +949,8 @@ if __name__ == '__main__':
 			print min_xfft, min_yfft, min_xAB, min_yAB
 
 			# Plot discrete E min point
-			ax.plot(min_xAB, min_yAB, 'yo', markersize=10)
+			ax.plot(min_xAB, min_yAB, 'yo', markersize=20)
+			#ax.plot(gradX[0], gradX[1], 'bo', markersize=10)
 
 		else:
 			ax.set_title("real(E_tot)")
