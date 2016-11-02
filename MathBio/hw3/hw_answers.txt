@@ -1,2 +1,38 @@
 Exercise Simple Gradient Descent:
-When setting the alpha value, if it is set too high it will overshoot the globalminimum and get stuck at a plateau to  the left.
+When setting the alpha value, if it is set too high it will overshoot the global
+minimum and get stuck at a plateau to  the left.
+
+Test Examples,
+
+1.
+
+Molecule 19, ran through with 18
+
+input
+python hw3.py 19 0.75 0.1 18 -1 -4 0.0001
+
+Finds a Energy level of about -59. This is about the same as what the discrete min method
+finds with a grid step size of 0.5.  Both methods find minimums in close proximity to each other.
+
+2.
+
+
+Molecule 9, ran through with 11
+
+input
+python hw3.py  9 0.75 0.001 11 -1.1 -2.5 0.0001
+
+Finds an Energy level of about -147 near the discrete min. But minimum found is actually slightly
+greater than the energy found by the discrete min method. The FFT method found a different location with lower
+energy of -188.
+
+3.
+
+Molecule 12, ran through with 18
+
+input
+python hw3.py  12 0.75 0.001 18 2.3 -2.3 0.0001
+
+The gradient descent method found a minimum of about -471. This is much better than the discrete min method which found
+only a minimum of around -459. The minimum found by gradient descent was close to the one found by the discrete min
+method but not anywhere near as close as in examples 1 and 2.
