@@ -72,11 +72,10 @@ achieve a lower cost. Therefore we can remove $f$ and run ordinary least cost di
 \subsubsection*{Case 3b}
 $c_f \leq c_a + c+b$
 
-By similar logic to case 1 here we would rather use $f$ than go through $w$. So we simply remove $w$ and run ordinary least cost dipaths on the resultant graph to aquire $y$ and $p$. Then if $y_\alpha \neq \inf$ then set $y_w = y_a + c_a$ and $p(w) = \alpha$. 
+In this case we can remove the arc $b$ and run ordinary least cost dipath. This is because if $b$ was used in a least cost dipath then so was $a$ and we could replace $a$ and $b$ with $f$ to get a dipath of less than or equal cost. This result would give us a final solution.
 
-This similarly accounts for dicircuits. 
-
-In both cases there are a constant number of operations so the reduction costs are $O(1)$. Therefore this whole procedure is the same time complexity as running ordinary least cost dipaths on a graph with $n-1$ nodes and $m-2$ edges. 
+\subsection*{Efficiency}
+Since all there are a constant number of steps in the reduction, the reduction is $O(1)$
 
 
 \end{document}
