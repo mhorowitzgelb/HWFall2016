@@ -41,14 +41,6 @@ def help_page():
 
    The last three are optional Van der Waals potential pars, need to give all three or none.
 
-   Examples:
-
-   python energyAB2.py 12 1 .75 .1 -5 5 .25 1 11
-
-   python energyAB2.py 12 1 .75 .1 -5 5 .25 1 11 2.5 .5 100.
-
-   python energyAB2.py 19 1 .75 .1 -5 5 .5 1 18 1.2 .5 100.
-
    '''
    print help
 
