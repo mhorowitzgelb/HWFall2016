@@ -1,0 +1,28 @@
+\documentclass[]{article}
+
+\usepackage{amssymb}
+
+\newcommand*{\QEDA}{\hfill\ensuremath{\blacksquare}}%
+
+\title{Assignment 3}
+\author{Max Horowitz-Gelb, Benjamin Chylla}
+
+\begin{document}
+\maketitle
+
+\section*{1}
+\section*{3}
+\subsection*{Corollary 3.8}	
+If $x$ is a feasible $(r$-$s)$-flow and $\delta(R)$ is an $(r$-$s)$-cut, then $x$ is maximum and $\delta(R)$ is minimum if and only if
+$x_e = u_e$, for all $e \in \delta(R)$ and $x_e = 0$ for all $e \in \delta(\bar{R})$.
+\subsection*{Proof}
+If $\delta(R)$ is a minimum $(r$-$s)$-cut then by the minimum cut maximum flow theorem, the maximum flow is equal to $u(\delta(R))$.  
+Then by corollary 3.3 and the fact that our flow is maximum $x(\delta(R)) - x(\delta(\bar{R})) = f_x(s) = u(\delta(R))$. And combining with the fact that $x_e$ must be non-negative, and $x_e \leq u_e$, then it must be true that $x_e = u_e$ for all $e \in R$ and $x_e = 0$ for all $e \in \bar{R}$.
+
+Vice-versa if $x$ is a maximum feasible flow and for some $(r$-$s)$ cut $\delta(R)$ we have that $x_e = u_e$ for all $e \in R$ and $x_e = 0$ for all $e \in \bar{R}$ then $\delta(R)$ must be a minimum $(r$-$s)$ cut. If not then let $\delta(R')$ be some minimum cut. Then by corollary 3.3, $x(\delta(R)) - x(\delta(\bar{R}) = x(\delta(R)) = u(\delta(R)) = f_x(s) > u(\delta(R')$ which creates a contradiction since our flow is greater than our minimum cut.
+\QEDA
+
+\section*{4}
+
+
+\end{document}
