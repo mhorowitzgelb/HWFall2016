@@ -1,28 +1,68 @@
 \documentclass[]{article}
 
 \usepackage{amssymb}
+\usepackage{graphicx}
 
 \newcommand*{\QEDA}{\hfill\ensuremath{\blacksquare}}%
 
-\title{Assignment 3}
+
+\title{\vspace{-2cm} Assignment 3}
 \author{Max Horowitz-Gelb, Benjamin Chylla}
 
 \begin{document}
 \maketitle
 
 \section*{1}
+Solution for problem\\
+Corrected augmented path\\
+rp pq qd ds width: 2\\
+Corrected augmented path\\
+rq qd ds width: 4\\
+Corrected augmented path\\
+ra ad dc cs width: 1\\
+Corrected augmented path\\
+ra ac cs width: 3\\
+Corrected augmented path\\
+ra ac cb bs width: 2\\
+Corrected augmented path\\
+rp pb bs width: 3\\
+Corrected augmented path\\
+ra ac cq qb bs width: 1\\
+Final flow:\\
+pq, u: 2, x: 2\\
+pb, u: 3, x: 3\\
+qp, u: 1, x: 0\\
+qb, u: 2, x: 1\\
+qd, u: 6, x: 6\\
+ra, u: 9, x: 7\\
+rp, u: 6, x: 5\\
+rq, u: 4, x: 4\\
+ds, u: 6, x: 6\\
+dc, u: 1, x: 1\\
+ad, u: 1, x: 1\\
+ac, u: 8, x: 6\\
+cs, u: 4, x: 4\\
+cq, u: 1, x: 1\\
+cb, u: 2, x: 2\\
+ba, u: 1, x: 0\\
+bs, u: 8, x: 6\\
+
+\includegraphics[scale=0.5]{Exercise1}
+
 \section*{3}
 \subsection*{Corollary 3.8}	
 If $x$ is a feasible $(r$-$s)$-flow and $\delta(R)$ is an $(r$-$s)$-cut, then $x$ is maximum and $\delta(R)$ is minimum if and only if
-$x_e = u_e$, for all $e \in \delta(R)$ and $x_e = 0$ for all $e \in \delta(\bar{R})$.
+$x_e = u_e$ for all $e \in \delta(R)$ and $x_e = 0$ for all $e \in \delta(\bar{R})$.
 \subsection*{Proof}
 If $\delta(R)$ is a minimum $(r$-$s)$-cut then by the minimum cut maximum flow theorem, the maximum flow is equal to $u(\delta(R))$.  
-Then by corollary 3.3 and the fact that our flow is maximum $x(\delta(R)) - x(\delta(\bar{R})) = f_x(s) = u(\delta(R))$. And combining with the fact that $x_e$ must be non-negative, and $x_e \leq u_e$, then it must be true that $x_e = u_e$ for all $e \in R$ and $x_e = 0$ for all $e \in \bar{R}$.
+Then by corollary 3.3 and the fact that our flow is maximum, $x(\delta(R)) - x(\delta(\bar{R})) = f_x(s) = u(\delta(R))$. And combining with the fact that $x_e$ must be non-negative, and $x_e \leq u_e$, then it must be true that $x_e = u_e$ for all $e \in R$ and $x_e = 0$ for all $e \in \bar{R}$ for the above equation to be correct.
 
-Vice-versa if $x$ is a maximum feasible flow and for some $(r$-$s)$ cut $\delta(R)$ we have that $x_e = u_e$ for all $e \in R$ and $x_e = 0$ for all $e \in \bar{R}$ then $\delta(R)$ must be a minimum $(r$-$s)$ cut. If not then let $\delta(R')$ be some minimum cut. Then by corollary 3.3, $x(\delta(R)) - x(\delta(\bar{R}) = x(\delta(R)) = u(\delta(R)) = f_x(s) > u(\delta(R')$ which creates a contradiction since our flow is greater than our minimum cut.
+Vice-versa if $x$ is a feasible flow and for some $(r$-$s)$ cut $\delta(R)$ we have that $x_e = u_e$ for all $e \in R$ and $x_e = 0$ for all $e \in \bar{R}$ then $\delta(R)$ must be a minimum $(r$-$s)$ cut. If not then let $\delta(R')$ be some minimum cut. Then by corollary 3.3, $x(\delta(R)) - x(\delta(\bar{R}) = x(\delta(R)) = u(\delta(R)) = f_x(s) > u(\delta(R')$ which creates a contradiction since our flow is greater than our minimum cut. And since $f_x(s) = u(\delta(R)$, then by the mininum cut maximum flow theorem our flow is maximum.
 \QEDA
 
 \section*{4}
+\includegraphics[scale=0.5]{exercise4}
 
+As one can see the figure above shows one maximum flow for this graph. As well, there are the labeled set of nodes $R = \{r,q,a\}$. Via visual inspection of our flow $x$, $R$ is the only set of nodes such that $\delta(R)$ is an $(r$-$s)$-cut, $x_e = u_e$ for all $e \in \delta(R)$ and $x_e = 0 $ for all $e \in \delta(\bar{R})$. Since by corrollary 3.8 a cut must have this property to be a minimum $(r$-$s)$-cut for any maximum flow, including $x$, then $\delta(R)$ is only minimum $(r$-$s)$ cut.  
 
 \end{document}
